@@ -66,7 +66,7 @@ police_records = df["Question"] + " " + df["Answer"]
 police_records = police_records.tolist()
 
 
-def retrieve(query, top_k=5):  # Increased from 3 to 5 for more context
+def retrieve(query, top_k=7):  # Increased from 3 to 5 for more context
     """Retrieve the most relevant police records using FAISS"""
     query_embedding = embedder.encode([query], convert_to_numpy=True).astype('float32')
     distances, indices = index.search(query_embedding, top_k)
@@ -83,7 +83,7 @@ def retrieve(query, top_k=5):  # Increased from 3 to 5 for more context
 
 def generate_response(query):
     """Generate a response using Mistral 7B + retrieved police records"""
-    retrieved_docs = retrieve(query, top_k=5)  # Increased from 3 to 5
+    retrieved_docs = retrieve(query, top_k=7)  # Increased from 3 to 5
     context = "\n".join(retrieved_docs) if retrieved_docs else "No relevant police record found."
 
     # Enhanced prompt format for more accurate responses
