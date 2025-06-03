@@ -68,7 +68,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
 
-- Inspired by various chatbot implementations and tutorials.
-- Dataset sourced and cleaned for optimal performance.
