@@ -9,7 +9,7 @@ A simple web-based chatbot application that utilizes a cleaned dataset to provid
 
 ## Project Structure
 
-chatbot/
+chatbot
 
 ├── backend.py                 # Python backend handling user queries
 
