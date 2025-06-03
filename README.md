@@ -10,12 +10,19 @@ A simple web-based chatbot application that utilizes a cleaned dataset to provid
 ## Project Structure
 
 chatbot/
+
 ├── backend.py                 # Python backend handling user queries
+
 ├── copbot_dataset_cleaned.csv # Dataset used for generating responses
+
 ├── index.html                 # Main HTML page
+
 ├── script.js                  # JavaScript for frontend interactions
+
 ├── styles.css                 # Styling for the chatbot interface
+
 ├── static/                    # Directory for static assets (if any)
+
 └── .gitignore                 # Specifies files to ignore in version control
 
 
