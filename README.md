@@ -1,71 +1,104 @@
-A simple web-based chatbot application that utilizes a cleaned dataset to provide responses. This project combines a Python backend with a frontend built using HTML, CSS, and JavaScript.
+AI-Powered Chatbot with Semantic Search
+An intelligent, full-stack chatbot application that leverages a Retrieval-Augmented Generation (RAG) architecture to provide highly accurate and contextually relevant responses. Unlike traditional chatbots that rely on keyword matching, this project uses semantic search powered by vector embeddings to understand the true intent behind user queries.
 
-## Features
+## Key Features
+ Semantic Understanding: Utilizes sentence-transformer models to convert both the dataset and user queries into dense vector embeddings, capturing deep contextual meaning.
 
-- **Interactive Chat Interface**: Engage in conversations through a user-friendly web interface.
-- **Python Backend**: Processes user inputs and generates appropriate responses.
-- **Cleaned Dataset**: Utilizes `copbot_dataset_cleaned.csv` for response generation.
-- **Modular Design**: Separation of concerns between frontend and backend components.
+ High-Speed Retrieval: Employs a FAISS (Facebook AI Similarity Search) vector index for efficient, sub-second retrieval of the most relevant information from the knowledge base.
+
+ RAG Architecture: Implements a modern Retrieval-Augmented Generation pipeline to find relevant context and deliver accurate, nuanced answers.
+
+ Interactive Web UI: A clean and responsive frontend built with HTML, CSS, and vanilla JavaScript for a seamless user experience.
+
+ Python Backend: A robust backend powered by Flask to handle API requests, query processing, and communication with the vector database.
+
+## Architecture Overview
+The project is divided into two main stages: Offline Indexing and Online Inference.
+
+### 1. Offline Indexing
+First, the knowledge base (copbot_dataset_cleaned.csv) is processed. Each entry is passed through the all-MiniLM-L6-v2 sentence-transformer model to generate a 384-dimensional vector embedding. These embeddings are then indexed and saved in a FAISS index file for fast retrieval.
+
+### 2. Online Inference (Live Chat)
+When a user sends a message, the following happens in real-time:
+
+The user's query is converted into a vector embedding using the same sentence-transformer model.
+
+This query vector is used to search the FAISS index for the top 'k' most similar vectors (i.e., the most relevant pieces of information from the original dataset).
+
+The context associated with these top vectors is retrieved.
+
+This retrieved context is used to generate a precise and relevant response, which is sent back to the user.
+
+## Technology Stack
+Backend: Python, Flask
+
+Frontend: HTML, CSS, JavaScript
+
+ML/AI Libraries:
+
+sentence-transformers (for generating embeddings)
+
+faiss-cpu (for vector indexing and search)
+
+pandas (for data handling)
+
+Environment: venv
 
 ## Project Structure
-
-chatbot
-
-├── backend.py                 # Python backend handling user queries
-
-├── copbot_dataset_cleaned.csv # Dataset used for generating responses
-
-├── index.html                 # Main HTML page
-
-├── script.js                  # JavaScript for frontend interactions
-
-├── styles.css                 # Styling for the chatbot interface
-
-├── static/                    # Directory for static assets (if any)
-
-└── .gitignore                 # Specifies files to ignore in version control
-
-
-## Prerequisites
-
-- Python 3.x installed on your system
-- Required Python packages (if any; specify here)
-
+chatbot/
+├── backend.py                 # Flask backend with API endpoints and RAG logic
+├── index.html                 # Main HTML page for the chat interface
+├── script.js                  # Frontend JavaScript for handling user interaction
+├── styles.css                 # CSS for styling the web interface
+├── copbot_dataset_cleaned.csv # The source dataset
+├── requirements.txt           # List of Python dependencies
+├── create_index.py            # Script for offline data processing and FAISS index creation
+└── faiss_index.bin            # The generated vector index file
 ## Installation & Usage
+Follow these steps to set up and run the project locally.
 
-1. **Clone the Repository**:
+### Prerequisites
+Python 3.9 or higher
 
-   ```bash
-   git clone https://github.com/Asar007/chatbot.git
-   cd chatbot
-   ```
+pip and venv
 
-2. **Install Dependencies**:
+### 1. Clone the Repository
+Bash
 
-   *(If there are any Python dependencies, list them here. For example:)*
+git clone https://github.com/Asar007/chatbot.git
+cd chatbot
+### 2. Create a Virtual Environment
+Bash
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+### 3. Install Dependencies
+Install all the required Python packages.
 
-3. Run the Backend Server:
+Bash
 
-   ```bash
-   python backend.py
-   ```
+pip install -r requirements.txt
+### 4. Create the Vector Index
+Run the one-time script to process the dataset and create the FAISS index file.
 
-   *Ensure that the server starts without errors.*
+Bash
 
-4. Access the Chatbot Interface:
+python create_index.py
+This will generate the faiss_index.bin file.
 
-   Open `index.html` in your preferred web browser to start interacting with the chatbot.
+### 5. Run the Backend Server
+Start the Flask application.
+
+Bash
+
+python backend.py
+The server will start, typically on http://127.0.0.1:5000.
+
+### 6. Access the Chatbot
+Open the index.html file in your web browser to begin chatting.
 
 ## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
+Contributions are welcome! Please feel free to fork the repository, make improvements, and submit a pull request.
 
 ## License
-
-This project is licensed under the MIT License. See the [LICENSE]((https://github.com/Asar007/chatbot/blob/main/LICENSE)) file for details.
-
-
+This project is licensed under the MIT License. See the LICENSE file for more deta
