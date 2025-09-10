@@ -47,13 +47,21 @@ Environment: venv
 ## Project Structure
 chatbot/
 ├── backend.py                 # Flask backend with API endpoints and RAG logic
+
 ├── index.html                 # Main HTML page for the chat interface
+
 ├── script.js                  # Frontend JavaScript for handling user interaction
+
 ├── styles.css                 # CSS for styling the web interface
+
 ├── copbot_dataset_cleaned.csv # The source dataset
+
 ├── requirements.txt           # List of Python dependencies
+
 ├── create_index.py            # Script for offline data processing and FAISS index creation
+
 └── faiss_index.bin            # The generated vector index file
+
 ## Installation & Usage
 Follow these steps to set up and run the project locally.
 
