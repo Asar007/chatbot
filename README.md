@@ -92,16 +92,16 @@ Run the one-time script to process the dataset and create the FAISS index file.
 
 ```Bash
 python create_index.py
-This will generate the faiss_index.bin file.
 ```
+This will generate the faiss_index.bin file.
+
 ### 5. Run the Backend Server
 Start the Flask application.
 
 ```Bash
 python backend.py
-The server will start, typically on http://127.0.0.1:5000.
 ```
-
+The server will start, typically on http://127.0.0.1:5000.
 
 ## Contributing
 Contributions are welcome! Please feel free to fork the repository, make improvements, and submit a pull request.
