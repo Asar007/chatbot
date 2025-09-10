@@ -46,6 +46,7 @@ Environment: venv
 
 ## Project Structure
 chatbot/
+
 ├── backend.py                 # Flask backend with API endpoints and RAG logic
 
 ├── index.html                 # Main HTML page for the chat interface
@@ -71,25 +72,25 @@ Python 3.9 or higher
 pip and venv
 
 ### 1. Clone the Repository
-Bash
+'''Bash
 
 git clone https://github.com/Asar007/chatbot.git
 cd chatbot
 ### 2. Create a Virtual Environment
-Bash
+'''Bash
 
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 ### 3. Install Dependencies
 Install all the required Python packages.
 
-Bash
+'''Bash
 
 pip install -r requirements.txt
 ### 4. Create the Vector Index
 Run the one-time script to process the dataset and create the FAISS index file.
 
-Bash
+'''Bash
 
 python create_index.py
 This will generate the faiss_index.bin file.
@@ -97,7 +98,7 @@ This will generate the faiss_index.bin file.
 ### 5. Run the Backend Server
 Start the Flask application.
 
-Bash
+'''Bash
 
 python backend.py
 The server will start, typically on http://127.0.0.1:5000.
