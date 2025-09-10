@@ -73,11 +73,10 @@ pip and venv
 
 ### 1. Clone the Repository
 ```Bash
-
 git clone https://github.com/Asar007/chatbot.git
 cd chatbot
-### 2. Create a Virtual Environment
 ```
+### 2. Create a Virtual Environment
 ```Bash
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
