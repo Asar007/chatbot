@@ -348,6 +348,81 @@
                 display: none;
             }
         }
+
+        /* Dark Theme Styles */
+        body.dark-theme {
+            background: linear-gradient(135deg, #0a0a2a 0%, #2b0000 100%);
+        }
+
+        body.dark-theme .chat-container {
+            background: rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-theme .chat-header {
+            background: linear-gradient(135deg, rgba(10, 10, 42, 0.95) 0%, rgba(43, 0, 0, 0.95) 100%);
+        }
+
+        body.dark-theme .chat-messages {
+            background: rgba(20, 20, 20, 0.7);
+        }
+
+        body.dark-theme .message-content {
+            background: rgba(40, 40, 40, 0.95);
+            color: #e0e0e0;
+        }
+
+        body.dark-theme .message.user .message-content {
+            background: linear-gradient(135deg, rgba(30, 40, 100, 0.95) 0%, rgba(100, 20, 20, 0.95) 100%);
+            color: white;
+        }
+
+        body.dark-theme .chat-input {
+            background: rgba(30, 30, 30, 0.95);
+            border-top-color: rgba(60, 60, 60, 0.5);
+        }
+
+        body.dark-theme #message-input {
+            background: rgba(40, 40, 40, 0.9);
+            color: white;
+            border-color: #444;
+        }
+
+        body.dark-theme #message-input::placeholder {
+            color: #aaa;
+        }
+
+        body.dark-theme #message-input:focus {
+            border-color: #4a53ae;
+            box-shadow: 0 0 0 3px rgba(74, 83, 174, 0.2);
+        }
+
+        body.dark-theme .timestamp {
+            color: #aaa;
+        }
+
+        body.dark-theme .typing-bubble {
+            background: rgba(60, 60, 60, 0.95);
+        }
+
+        body.dark-theme .typing-dot {
+            background: #aaa;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -361,6 +436,7 @@
         <div class="chat-header">
             <img src="/static/bot-avatar.png" alt="Police Assistant">
             <h1>Police Assistant</h1>
+            <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Theme">🌙</button>
         </div>
         <div class="chat-messages" id="chat-messages">
             <!-- Messages will be added here dynamically -->
@@ -387,7 +463,22 @@
             const messageInput = document.getElementById('message-input');
             const sendButton = document.getElementById('send-button');
             const chatMessages = document.getElementById('chat-messages');
+            const themeToggle = document.getElementById('theme-toggle');
             const BOT_AVATAR = '/static/bot-avatar.png';
+
+            // Theme toggle functionality
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDark = document.body.classList.contains('dark-theme');
+                themeToggle.textContent = isDark ? '☀️' : '🌙';
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
 
             function formatTime(date) {
                 return date.toLocaleTimeString('en-US', { 
