@@ -348,6 +348,55 @@
                 display: none;
             }
         }
+        /* Theme Toggle Button */
+#theme-toggle {
+    margin-left: auto;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#theme-toggle:hover {
+    background: rgba(255,255,255,0.35);
+    transform: rotate(20deg) scale(1.1);
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a0000 100%);
+}
+body.dark-mode .chat-container {
+    background: rgba(20, 20, 35, 0.98);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+body.dark-mode .chat-messages {
+    background: rgba(12, 12, 22, 0.95);
+}
+body.dark-mode .message-content {
+    background: rgba(35, 35, 55, 0.95);
+    color: #dde1f0;
+}
+body.dark-mode .timestamp { color: #888; }
+body.dark-mode .chat-input {
+    background: rgba(22, 22, 38, 0.98);
+    border-top-color: rgba(255,255,255,0.08);
+}
+body.dark-mode #message-input {
+    background: rgba(35, 35, 55, 0.9);
+    border-color: rgba(255,255,255,0.1);
+    color: #dde1f0;
+}
+body.dark-mode #message-input::placeholder { color: #666; }
+body.dark-mode #message-input:focus {
+    border-color: #7986cb;
+    box-shadow: 0 0 0 3px rgba(121,134,203,0.2);
+}
+body.dark-mode .typing-bubble { background: rgba(35, 35, 55, 0.95); }
+body.dark-mode .typing-dot { background: #999; }
     </style>
 </head>
 <body>
@@ -361,6 +410,7 @@
         <div class="chat-header">
             <img src="/static/bot-avatar.png" alt="Police Assistant">
             <h1>Police Assistant</h1>
+            <button id="theme-toggle" title="Toggle dark/light mode">🌙</button>
         </div>
         <div class="chat-messages" id="chat-messages">
             <!-- Messages will be added here dynamically -->
@@ -514,7 +564,18 @@
                 messageInput.style.height = 'auto';
                 messageInput.style.height = messageInput.scrollHeight + 'px';
             });
-
+            // Dark mode toggle with localStorage persistence
+const themeToggle = document.getElementById('theme-toggle');
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.textContent = '☀️';
+}
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
             // Initial welcome message
             addMessage('Hello! I\'m your Police Procedure Assistant. How can I help you today?', false);
         });
